@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inserir Notas</title>
+
+    <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+
+    <script>
+        let notas = "";  // Acumular todas as notas inseridas
+
+        function salvarNota() {
+            const id = document.getElementById("id").value;  // Obtém o ID do aluno
+            const nome = document.getElementById("nome").value;
+            const disciplina = document.getElementById("disciplina").value;
+            const nota = document.getElementById("nota").value;
+
+            if (!id || !nome || !disciplina || !nota) {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+
+            if (isNaN(nota) || nota < 0 || nota > 20) {
+                alert("Por favor, insira uma nota válida (entre 0 e 20).");
+                return;
+            }
+
+            // Cria a linha com os dados da nota, incluindo o ID do aluno
+            const linha = `${id};${nome};${disciplina};${nota}\n`;
+
+            // Acumula as notas na variável 'notas'
+            notas += linha;
+
+            alert("Nota salva com sucesso!");
+            document.getElementById("form-nota").reset();  // Limpa o formulário
+        }
+
+        function baixarNotas() {
+            if (notas === "") {
+                alert("Nenhuma nota foi adicionada.");
+                return;
+            }
+
+            // Cria o arquivo 'notas.txt' com todas as notas acumuladas
+            const blob = new Blob([notas], { type: "text/plain" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "notas.txt";  // Nome do arquivo para o download
+            a.click();
+        }
+    </script>
+</head>
+<body>
+    <h1>Inserir Nota</h1>
+    <form id="form-nota" onsubmit="event.preventDefault(); salvarNota();">
+        <label for="id">Número do Aluno:</label><br>
+        <input type="text" id="id" name="id" required><br><br>
+
+        <label for="nome">Nome:</label><br>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="disciplina">Disciplina:</label><br>
+        <input type="text" id="disciplina" name="disciplina" required><br><br>
+
+        <label for="nota">Nota:</label><br>
+        <input type="number" id="nota" name="nota" step="0.1" min="0" max="20" required><br><br>
+
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <br><br>
+
+    <button onclick="baixarNotas()">Baixar Notas</button>
+</body>
+</html>
