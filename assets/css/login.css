@@ -1,0 +1,84 @@
+.login-container {
+
+}
+
+.login {
+	border: 1px solid var(--border);
+	border-radius: var(--radius-xxl);
+	box-shadow: var(--shadow-sm);
+	width: 400px;
+}
+
+.login-header {
+	padding: var(--spacing-lg);
+	border-bottom: 1px solid var(--border);
+}
+
+.login-header-title {
+	padding-bottom: var(--spacing-xxs);
+	font-weight: 500;
+	color: var(--text-primary);
+}
+
+.login-header-description {
+	color: var(--text-secondary);
+	font-weight: 400;
+}
+
+.login-content {
+	padding: var(--spacing-lg);
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-lg);
+}
+
+.login-inputs {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-md);
+}
+
+.text-input {
+	display: flex;
+	flex-direction: column;
+}
+
+.text-input-container {
+	display: flex;
+	gap: var(--spacing-sm);
+	border: 1px solid var(--border);
+	padding: var(--spacing) var(--spacing-md);
+	border-radius: var(--radius);
+	height: 2.5rem;
+}
+
+.text-input-container input {
+	outline: none;
+	border: none;
+	width: 100%;
+}
+
+.text-input-container input::placeholder {
+	color: var(--text-placeholder);
+}
+
+.text-input-container:focus-within :where(.icon-utilizador, .icon-chave, .olho-icon) > path {
+	stroke: var(--icon-active);
+	min-width: 1.25rem;
+	min-height: 1.25rem;
+}
+
+:where(.icon-utilizador, .icon-chave, .olho-icon) > path {
+	stroke: var(--icon-base);
+	min-width: 1.25rem;
+	min-height: 1.25rem;
+}
+
+.text-input-container:focus-within {
+	border: 1px solid var(--border-brand);
+	transition: all 0.3s ease-out;
+}
+
+.login-label {
+	padding-bottom: var(--spacing-xxs);
+}

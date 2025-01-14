@@ -1,0 +1,132 @@
+:root {
+	/* Font */
+	--font-header: "Geist", sans-serif;
+	--font-body: "Geist", sans-serif;
+	--font-weight-medium: 500;
+	--font-weight-base: 400;
+	--size: 16px;
+
+	/* ---------- Border Radius ---------- */
+	--radius-xxs:  calc(var(--size) * 0.25);   /* 4px */
+	--radius-xs:   calc(var(--size) * 0.375);  /* 6px */
+	--radius-sm:   calc(var(--size) * 0.5);    /* 8px */
+	--radius:      calc(var(--size) * 0.625);  /* 10px */
+	--radius-md:   calc(var(--size) * 0.75);   /* 12px */
+	--radius-lg:   calc(var(--size));          /* 16px */
+	--radius-xl:   calc(var(--size) * 1.25);   /* 20px */
+	--radius-xxl:  calc(var(--size) * 1.5);    /* 24px */
+	--radius-full: 999px;                      /* 999px */
+
+	/* ---------- Colors ---------- */
+	--border: #E8E8E8;
+	--border-brand: #335CFF;
+	--border-filled: #A5A5A5;
+	--surface: #FFFFFF;
+	--surface-brand: #335CFF;
+	--text-white: #FFFFFF;
+	--text-primary: #171717;
+	--text-secondary: #404040;
+	--text-brand: #335CFF;
+	--text-placeholder: #757575;
+	--icon-base: #757575;
+	--icon-active: #252525;
+	--outline-brand: #c0ccff;
+	--caret-brand: #335CFF;
+
+	/* ---------- Spacing ---------- */
+	--spacing-xxs:  calc(var(--size) * 0.25);   /* 4px */
+	--spacing-xs:   calc(var(--size) * 0.375);  /* 6px */
+	--spacing-sm:   calc(var(--size) * 0.5);    /* 8px */
+	--spacing:      calc(var(--size) * 0.625);  /* 10px */
+	--spacing-md:   calc(var(--size) * 0.75);   /* 12px */
+	--spacing-lg:   calc(var(--size));          /* 16px */
+	--spacing-xl:   calc(var(--size) * 1.25);   /* 20px */
+	--spacing-xxl:  calc(var(--size) * 1.5);    /* 24px */
+	--spacing-huge: calc(var(--size) * 6);      /* 96px */
+	--spacing-full: 999px;                      /* 999px */
+
+	/* Shadow*/
+	--shadow-sm: 0px 1px 2px 0px rgba(20, 21, 26, 0.05);
+}
+
+html {
+	font-size: var(--size);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	caret-color: var(--caret-brand);
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body.public {
+  	font-optical-sizing: auto;
+	font-style: normal;
+	height: 100vh;
+	display: grid;
+	place-content: center;
+}
+
+/* ---------- Typography ---------- */
+
+h1, h2, h3, h4, h5 {
+	font-family: var(--font-header);
+}
+
+p, span, label {
+	font-family: var(--font-body);
+}
+
+
+.label-md {
+	font-size: var(--size);
+	font-weight: var(--font-weight-medium);
+	line-height: 1.5rem;
+	letter-spacing: -1.1%;
+}
+
+.label-sm {
+	font-size: 0.875rem;
+	font-weight: var(--font-weight-medium);
+	line-height: 1.25rem;
+	letter-spacing: -0.084px;
+}
+
+.paragraph-md {
+	font-size: var(--size);
+	font-weight: var(--font-weight-base);
+	line-height: 1.5rem;
+	letter-spacing: -1.1%;
+}
+
+.paragraph-sm {
+	font-size: 0.875rem;
+	font-weight: var(--font-weight-base);
+	line-height: 1.25rem;
+	letter-spacing: -0.084px;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn-primary {
+	padding: var(--spacing-md) var(--spacing);
+	background-color: var(--surface-brand);
+	color: var(--text-white);
+	border-radius: var(--radius-md);
+	border: 0;
+	width: 100%;
+	height: min-content;
+}
+
+.btn-primary:focus {
+	outline-offset: 0.200rem;
+	outline-color: var(--outline-brand);
+	box-shadow: 0 0 0 10px rgba(255, 255, 255, 1); /* Anel branco com 2px de espaçamento */
+  }
+
+.btn-danger {
+	
+}
