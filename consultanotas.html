@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas da Turma - Alunos</title>
+    <style>
+        /* Mesma estilização */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9f9f9;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Notas da Turma - Alunos</h1>
+
+        <input type="file" id="fileInput" />
+        <table id="gradesTable">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Disciplina</th>
+                    <th>Nota</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Notas serão carregadas aqui -->
+            </tbody>
+        </table>
+
+        <p id="message">As notas ainda não foram carregadas.</p>
+    </div>
+
+    <script>
+        const gradesTable = document.getElementById('gradesTable').getElementsByTagName('tbody')[0];
+        const message = document.getElementById('message');
+        const fileInput = document.getElementById('fileInput');
+
+        function renderGrades(students) {
+            if (students.length === 0) {
+                message.textContent = "Não há notas para exibir.";
+                return;
+            }
+
+            message.textContent = "";
+            gradesTable.innerHTML = '';
+
+            students.forEach(student => {
+                const row = gradesTable.insertRow();
+
+                const cellName = row.insertCell(0);
+                const cellSubject = row.insertCell(1);
+                const cellGrade = row.insertCell(2);
+
+                cellName.textContent = student.name;
+                cellSubject.textContent = student.subject;
+                cellGrade.textContent = student.grade;
+            });
+        }
+
+        // Função para processar o conteúdo do arquivo
+        function processFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const content = event.target.result;
+                const lines = content.split('\n');
+                const students = lines.map(line => {
+                    const [name, subject, grade] = line.split(',');
+                    return {
+                        name: name.trim(),
+                        subject: subject.trim(),
+                        grade: grade.trim()
+                    };
+                });
+
+                renderGrades(students);
+            };
+            reader.readAsText(file);
+        }
+
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                processFile(file);
+            }
+        });
+    </script>
+</body>
+</html>

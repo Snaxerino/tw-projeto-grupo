@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem Vindo</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <script src="../../assets/js/auth.js" defer></script> <!-- Carrega o arquivo auth.js -->
+    <style>
+        .eye-icon {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .text-input-container {
+            position: relative;
+        }
+        .custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #4caf50; /* Verde para sucesso */
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            z-index: 1000;
+            display: none;
+        }
+        .error-alert {
+            background-color: #f44336; /* Vermelho para erro */
+            color: white;
+        }
+        .custom-alert button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: white;
+            color: #4caf50;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .custom-alert button:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body class="public">
+    <section class="login-container">
+        <form class="login" action="#" id="login-form">
+            <div class="login-header">
+                <p class="login-header-title">Bem-vindo de volta</p>
+                <p class="login-header-description">Coloque as suas credenciais para entrar!</p>
+            </div>
+            <div class="login-content">
+                <div class="login-inputs">
+                    <div class="text-input">
+                        <label for="utilizador" class="login-label">Utilizador</label>
+                        <div class="text-input-container">
+                            <input type="text" name="utilizador" id="utilizador" class="paragraph-sm" placeholder="Nome de utilizador" required>
+                        </div>
+                    </div>
+                    <div class="text-input">
+                        <label for="password" class="login-label">Palavra Passe</label>
+                        <div class="text-input-container">
+                            <input type="password" name="password" id="password" class="paragraph-sm" placeholder="Coloque a sua palavra passe" required>
+                            <svg 
+                                class="eye-icon" 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                width="20" 
+                                height="20" 
+                                fill="none" 
+                                viewBox="0 0 24 24" 
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12m0 0a3 3 0 11-6 0 3 3 0 016 0zm9 0c0 6-9 11-9 11s-9-5-9-11 9-11 9-11 9 5 9 11z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary label-sm">Login</button>
+            </div>
+        </form>
+    </section>
+    <div class="custom-alert" id="custom-alert">
+        <p>Bem-vindo(a)! Login efetuado com sucesso!</p>
+        <button id="close-alert">Continuar</button>
+    </div>
+    <div class="custom-alert error-alert" id="error-alert">
+        <p>Credenciais inválidas. Tente novamente!</p>
+        <button id="close-error-alert">Fechar</button>
+    </div>
+    <script>
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.querySelector('.eye-icon');
+        const loginForm = document.getElementById('login-form');
+        const customAlert = document.getElementById('custom-alert');
+        const errorAlert = document.getElementById('error-alert');
+        const closeAlert = document.getElementById('close-alert');
+        const closeErrorAlert = document.getElementById('close-error-alert');
+
+        // Alterna entre mostrar e esconder a senha
+        eyeIcon.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            eyeIcon.classList.toggle('active');
+        });
+
+        // Verifica as credenciais e exibe o alerta correspondente
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Impede o envio do formulário para exibir a mensagem
+            
+            const username = document.getElementById('utilizador').value;
+            const password = document.getElementById('password').value;
+            
+            // Verificar as credenciais do arquivo auth.js
+            if (username === validCredentials.username && password === validCredentials.password) {
+                customAlert.style.display = 'block';
+                errorAlert.style.display = 'none'; // Ocultar alerta de erro
+            } else {
+                errorAlert.style.display = 'block';
+                customAlert.style.display = 'none'; // Ocultar alerta de sucesso
+            }
+        });
+
+        // Fecha o alerta de sucesso e redireciona
+        closeAlert.addEventListener('click', () => {
+            customAlert.style.display = 'none';
+            window.location.href = 'aluno_dashboard.html'; // Redireciona para a página após fechar o alerta
+        });
+
+        // Fecha o alerta de erro
+        closeErrorAlert.addEventListener('click', () => {
+            errorAlert.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

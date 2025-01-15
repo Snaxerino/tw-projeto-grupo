@@ -1,44 +1,44 @@
-function saveUserData(username, password) {
-    const userData = {
-        username: username,
-        password: password,
-    };
+// auth.js
 
-    localStorage.setItem('userData', JSON.stringify(userData));
-    alert('Dados guardados com sucesso!');
-}
+document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.querySelector(".login");
 
-function login(event) {
-    event.preventDefault();
+    // Lista de utilizadores pré-definidos
+    const users = [
+        { username: "admin", password: "12345", role: "admin" },
+        { username: "professor1", password: "prof123", role: "professor" },
+        { username: "professor2", password: "prof456", role: "professor" },
+        { username: "aluno1", password: "aluno123", role: "aluno" },
+        { username: "aluno2", password: "aluno456", role: "aluno" }
+    ];
 
-    const username = document.getElementById('utilizador').value;
-    const password = document.getElementById('password').value;
+    loginForm.addEventListener("submit", (event) => {
+        event.preventDefault(); // Evita o envio padrão do formulário
 
-    const storedData = JSON.parse(localStorage.getItem('userData'));
+        const usernameInput = document.getElementById("utilizador").value;
+        const passwordInput = document.getElementById("password").value;
 
-    if (storedData) {
-        if (storedData.username === username && storedData.password === password) {
-            alert('Login bem-sucedido!');
-            window.location.href = '../pages/dashboard.html';
+        // Verifica se as credenciais fornecidas correspondem a algum utilizador
+        const user = users.find(user => user.username === usernameInput && user.password === passwordInput);
+
+        if (user) {
+
+            // Redirecionar com base no tipo de utilizador
+            switch (user.role) {
+                case "admin":
+                    window.location.href = "dashboard.html";
+                    break;
+                case "professor":
+                    window.location.href = "professor_dashboard.html";
+                    break;
+                case "aluno":
+                    window.location.href = "aluno_dashboard.html";
+                    break;
+                default :
+                   console.log("failed");
+            }
         } else {
-            alert('Credenciais incorretas. Tente novamente.');
+            console.log("failed");
         }
-    } else {
-        alert('Credenciais erradas. Tente novamente.');
-    }
-}
-
-document.querySelector('form.login').addEventListener('submit', login);
-
-function registerUser(event) {
-    event.preventDefault();
-
-    const username = document.getElementById('utilizador').value;
-    const password = document.getElementById('password').value;
-
-    if (username && password) {
-        saveUserData(username, password);
-    } else {
-        alert('Por favor, preencha todos os campos.');
-    }
-}
+    });
+});
