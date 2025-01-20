@@ -1,5 +1,3 @@
-// auth.js
-
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.querySelector(".login");
 
@@ -22,9 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const user = users.find(user => user.username === usernameInput && user.password === passwordInput);
 
         if (user) {
-            // Login bem-sucedido
-            alert("Login realizado com sucesso! Bem-vindo, " + user.username + "!");
-
             // Redirecionar com base no tipo de utilizador
             switch (user.role) {
                 case "admin":
@@ -37,11 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     window.location.href = "aluno_dashboard.html";
                     break;
                 default:
-                    alert("Tipo de utilizador desconhecido. Por favor, contate o suporte.");
+                    alert("Ocorreu um erro. Por favor, tente novamente.");
             }
         } else {
-            // Login falhou
-            alert("Utilizador ou palavra passe incorretos. Por favor, tente novamente.");
+            
+            
         }
     });
 });

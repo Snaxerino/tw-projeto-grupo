@@ -54,19 +54,15 @@
             margin-top: 1rem;
         }
 
-        button {
-            display: block;
-            margin: 1rem auto;
-            padding: 0.5rem 1rem;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        #message {
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: bold;
         }
 
-        button:hover {
-            background-color: #45a049;
+        input[type="file"] {
+            display: block;
+            margin: 1rem auto;
         }
     </style>
 </head>
@@ -74,37 +70,35 @@
     <div class="container">
         <h1>Notas da Turma - Alunos</h1>
 
-        <!-- Input para carregar o arquivo -->
         <input type="file" id="fileInput" />
-        
-        <!-- Botão Submeter -->
-        <button id="submitBtn">Submeter</button>
-        
+        <button id="loadBtn">Visualizar Notas</button>
+
         <table id="gradesTable">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Nome</th>
                     <th>Disciplina</th>
                     <th>Nota</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Notas serão carregadas aqui -->
+                <!-- As notas carregadas serão exibidas aqui -->
             </tbody>
         </table>
 
-        <p id="message">As notas ainda não foram carregadas.</p>
+        <p id="message">Nenhum arquivo carregado.</p>
     </div>
 
     <script>
         const gradesTable = document.getElementById('gradesTable').getElementsByTagName('tbody')[0];
         const message = document.getElementById('message');
         const fileInput = document.getElementById('fileInput');
-        const submitBtn = document.getElementById('submitBtn');
+        const loadBtn = document.getElementById('loadBtn');
 
-        let studentsData = [];  // Para armazenar os dados dos alunos após carregar o arquivo
+        let fileContent = "";
 
-        // Função para renderizar as notas dos alunos na tabela
+        // Função para exibir as notas na tabela
         function renderGrades(students) {
             if (students.length === 0) {
                 message.textContent = "Não há notas para exibir.";
@@ -117,13 +111,15 @@
             students.forEach(student => {
                 const row = gradesTable.insertRow();
 
-                const cellName = row.insertCell(0);
-                const cellSubject = row.insertCell(1);
-                const cellGrade = row.insertCell(2);
+                const cellId = row.insertCell(0);
+                const cellName = row.insertCell(1);
+                const cellSubject = row.insertCell(2);
+                const cellGrade = row.insertCell(3);
 
-                cellName.textContent = student.name;
-                cellSubject.textContent = student.subject;
-                cellGrade.textContent = student.grade;
+                cellId.textContent = student.id;
+                cellName.textContent = student.nome;
+                cellSubject.textContent = student.disciplina;
+                cellGrade.textContent = student.nota;
             });
         }
 
@@ -131,44 +127,40 @@
         function processFile(file) {
             const reader = new FileReader();
             reader.onload = function(event) {
-                const content = event.target.result;
-                const lines = content.split('\n').map(line => line.trim()).filter(line => line); // Filtra linhas vazias
-                studentsData = lines.map(line => {
-                    const [id, name, subject, grade] = line.split(';'); // Altere o delimitador conforme necessário
-                    return {
-                        id: id.trim(),
-                        name: name.trim(),
-                        subject: subject.trim(),
-                        grade: grade.trim()
-                    };
-                });
-
-                // Exibe os dados processados no console para debugging
-                console.log(studentsData);
+                fileContent = event.target.result;
+                message.textContent = "Arquivo carregado com sucesso!";
             };
             reader.readAsText(file);
         }
 
-        // Detecta o arquivo carregado
+        // Função para ler o arquivo e converter para formato utilizável
+        function parseFileContent() {
+            if (!fileContent) {
+                alert("Por favor, carregue o arquivo 'notas.txt'.");
+                return;
+            }
+
+            const lines = fileContent.split('\n');
+            const students = lines.map(line => {
+                const [id, nome, disciplina, nota] = line.split(';');
+                return { id: id.trim(), nome: nome.trim(), disciplina: disciplina.trim(), nota: nota.trim() };
+            });
+
+            renderGrades(students);
+        }
+
+        // Configuração do evento do input de arquivo
         fileInput.addEventListener('change', function(event) {
             const file = event.target.files[0];
-            if (file) {
-                if (file.type !== "text/plain") {
-                    alert("Por favor, carregue um arquivo de texto.");
-                    return;
-                }
+            if (file && file.name === 'notas.txt') {
                 processFile(file);
+            } else {
+                alert("Por favor, carregue o arquivo 'notas.txt'.");
             }
         });
 
-        // Evento do botão "Submeter" para renderizar as notas
-        submitBtn.addEventListener('click', function() {
-            if (studentsData.length === 0) {
-                alert("Por favor, carregue um arquivo primeiro.");
-            } else {
-                renderGrades(studentsData);
-            }
-        });
+        // Evento do botão "Visualizar Notas"
+        loadBtn.addEventListener('click', parseFileContent);
     </script>
 </body>
 </html>

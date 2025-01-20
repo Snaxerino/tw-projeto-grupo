@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inserir Notas</title>
-
-    <!-- Link para o arquivo CSS -->
     <link rel="stylesheet" href="../../assets/css/styles.css">
-
     <script>
-        let notas = "";  // Acumular todas as notas inseridas
+        let notas = ""; // Acumular todas as notas inseridas
 
         function salvarNota() {
-            const id = document.getElementById("id").value;  // Obtém o ID do aluno
+            const id = document.getElementById("id").value;
             const nome = document.getElementById("nome").value;
             const disciplina = document.getElementById("disciplina").value;
             const nota = document.getElementById("nota").value;
@@ -27,28 +24,34 @@
                 return;
             }
 
-            // Cria a linha com os dados da nota, incluindo o ID do aluno
+            // Cria a linha com os dados da nota
             const linha = `${id};${nome};${disciplina};${nota}\n`;
 
             // Acumula as notas na variável 'notas'
             notas += linha;
 
             alert("Nota salva com sucesso!");
-            document.getElementById("form-nota").reset();  // Limpa o formulário
+            document.getElementById("form-nota").reset(); // Limpa o formulário
         }
 
-        function baixarNotas() {
+        function salvarNoDisco() {
             if (notas === "") {
                 alert("Nenhuma nota foi adicionada.");
                 return;
             }
 
-            // Cria o arquivo 'notas.txt' com todas as notas acumuladas
+            // Nome do arquivo a ser baixado
+            const nomeArquivo = "notas.txt";
+
+            // Cria um blob com o conteúdo das notas
             const blob = new Blob([notas], { type: "text/plain" });
-            const a = document.createElement("a");
-            a.href = URL.createObjectURL(blob);
-            a.download = "notas.txt";  // Nome do arquivo para o download
-            a.click();
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = nomeArquivo; // Define o nome do arquivo
+            link.click();
+
+            alert(`Notas salvas no arquivo "${nomeArquivo}". Confira a pasta de downloads do navegador.`);
+            notas = ""; // Limpa a memória
         }
     </script>
 </head>
@@ -72,6 +75,6 @@
 
     <br><br>
 
-    <button onclick="baixarNotas()">Baixar Notas</button>
+    <button onclick="salvarNoDisco()">Salvar Notas no Arquivo</button>
 </body>
 </html>
