@@ -1,0 +1,78 @@
+.container {
+	border: 1px solid var(--border);
+    border-radius: var(--radius-xxl);
+    box-shadow: var(--shadow-sm);
+    width: 600px;
+	overflow: hidden;
+}
+
+.container-header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border);
+}
+
+.container-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+	overflow-y: auto;
+	height: 212px;
+}
+
+.container-footer {
+    padding: var(--spacing-lg);
+	border-top: 1px solid var(--border);
+    display: flex;
+	flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	border: 0;
+}
+
+thead, tbody, tr, th, td {
+	text-align: start;
+	border: 0;
+}
+
+th {
+	border-right: 1px solid var(--border);
+	border-bottom: 1px solid var(--border);
+	background: var(--foreground);
+	padding: var(--spacing-xs);
+	color: var(--text-secondary);
+}
+
+td {
+	border-right: 1px solid var(--border);
+	padding: var(--spacing);
+	color: var(--text-primary);
+}
+
+tr {
+	border-bottom: 1px solid var(--border);
+}
+
+tr:last-child {
+	border: 0;
+}
+
+th:first-child, td:first-child  {
+	padding-left: var(--spacing-lg);
+}
+
+th:last-child, td:last-child  {
+	padding-right: var(--spacing-lg);
+	border: 0;
+}
+
+th.nota, td.nota {
+	text-align: end;
+}
+
+th.nota {
+	border-bottom: 1px solid var(--border);
+}

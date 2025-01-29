@@ -1,44 +1,29 @@
-function saveUserData(username, password) {
-    const userData = {
-        username: username,
-        password: password,
-    };
+const USERS = [
+    { numero: 40342772, turma: "A", cargo: "Admin", nome: "Mário Pinto", password: "1234", avatar: "/assets/imgs/alunos/avatar.jpg"},
+    { numero: 40240700, turma: "A", cargo: "Aluno", nome: "João", password: "12345", avatar: "/assets/imgs/professores/avatar.jpg"},
+]
 
-    localStorage.setItem('userData', JSON.stringify(userData));
-    alert('Dados guardados com sucesso!');
-}
+const login = (event) => {
+    event.preventDefault()
+    const PRIVATE_PATH = "pages/dashboard.html"
 
-function login(event) {
-    event.preventDefault();
+    const utilizador = document.getElementById("utilizador").value.trim()
+    const password = document.getElementById("password").value
 
-    const username = document.getElementById('utilizador').value;
-    const password = document.getElementById('password').value;
+    const utilizadorValido = USERS.find(credencial => 
+        (credencial.nome === utilizador || String(credencial.numero) === utilizador) && 
+        credencial.password === password
+    );
 
-    const storedData = JSON.parse(localStorage.getItem('userData'));
+    if (utilizadorValido) {
+        sessionStorage.setItem("utilizadorNumero", utilizadorValido.numero)
+        sessionStorage.setItem("utilizadorTurma", utilizadorValido.turma)
+        sessionStorage.setItem("utilizadorNome", utilizadorValido.nome)
+        sessionStorage.setItem("utilizadorAvatar", utilizadorValido.avatar)
+        sessionStorage.setItem("utilizadorCargo", utilizadorValido.cargo)
 
-    if (storedData) {
-        if (storedData.username === username && storedData.password === password) {
-            alert('Login bem-sucedido!');
-            window.location.href = '../pages/dashboard.html';
-        } else {
-            alert('Credenciais incorretas. Tente novamente.');
-        }
-    } else {
-        alert('Credenciais erradas. Tente novamente.');
+        window.location.href = PRIVATE_PATH } else { alert("Credenciais inválidas. Tente novamente.")
     }
 }
 
-document.querySelector('form.login').addEventListener('submit', login);
-
-function registerUser(event) {
-    event.preventDefault();
-
-    const username = document.getElementById('utilizador').value;
-    const password = document.getElementById('password').value;
-
-    if (username && password) {
-        saveUserData(username, password);
-    } else {
-        alert('Por favor, preencha todos os campos.');
-    }
-}
+document.querySelector(".login").addEventListener("submit", login);

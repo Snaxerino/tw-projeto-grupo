@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem das Notas</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body class="private" id="notas">
+	<header class="dashboard">
+		<a href="../pages/dashboard.html">
+			<img src="../../assets/imgs/logo-ipp.png" alt="Instituto Politécnico do Porto" height="32">
+		</a>
+		<nav>
+			<ul>
+				<li><a class="label-md nav-link" href="dashboard.html">Inserir Notas</a></li>
+				<li><a class="label-md nav-link active" href="notas.html">Ver Notas</a></li>
+			</ul>
+		</nav>
+		<div class="perfil">
+			<button class="perfil-utilizador">
+				<span id="utilizadorNome" class="label-md"></span>
+				<img id="utilizadorAvatar" class="avatar-utilizador" alt="Avatar do utilizador"/>
+			</button>
+			<div id="dropdown" class="menu">
+				<p class="paragraph-sm info-utilizador">Utilizador: <span id="utilizadorCargo" class="label-sm"></span></p>
+				<p class="paragraph-sm info-utilizador">Número: <span id="utilizadorNumero" class="label-sm"></span></p>
+				<p class="paragraph-sm info-utilizador">Turma: <span id="utilizadorTurma" class="label-sm"></span></p>
+				<div class="hr"></div>
+				<button class="btn-tertiary label-sm" id="logout">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="#000000" fill="none">
+						<path d="M11 3L10.3374 3.23384C7.75867 4.144 6.46928 4.59908 5.73464 5.63742C5 6.67576 5 8.0431 5 10.7778V13.2222C5 15.9569 5 17.3242 5.73464 18.3626C6.46928 19.4009 7.75867 19.856 10.3374 20.7662L11 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+						<path d="M21 12L11 12M21 12C21 11.2998 19.0057 9.99153 18.5 9.5M21 12C21 12.7002 19.0057 14.0085 18.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+					</svg> Sair
+				</button>
+			</div>
+		</div>
+	</header>
+	<section class="content">
+		<div class="container">
+			<div class="container-header">
+				<p class="login-header-title">Lista de Notas</p>
+				<p class="login-header-description">Notas dos alunos nas Unidades Curriculares!</p>
+			</div>
+			<div class="container-content">
+				<table border="1">
+					<thead>
+						<tr>
+							<th class="label-md">Nome</th>
+							<th class="label-md">Unidade Curricular</th>
+							<th class="label-md">Nota</th>
+						</tr>
+					</thead>
+					<tbody id="tabela-notas">
+						
+					</tbody>
+				</table>
+			</div>
+			<div class="container-footer">
+				<input type="file" id="uploadNotas" accept=".csv">
+				<button id="carregarNotas" class="btn-primary label-sm">Carregar Notas</button>
+			</div>
+		</div>
+	</section>
+	
+	<script src="../../assets/js/dashboard.js"></script>
+	<script src="../../assets/js/notas.js"></script>
+</body>
+</html>

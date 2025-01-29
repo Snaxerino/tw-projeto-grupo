@@ -1,0 +1,26 @@
+.form {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xxl);
+    box-shadow: var(--shadow-sm);
+    width: 400px;
+	overflow: hidden;
+}
+
+.form-header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border);
+}
+
+.form-content {
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.form-footer {
+    padding: var(--spacing-lg);
+	border-top: 1px solid var(--border);
+    display: flex;
+    gap: var(--spacing-lg);
+}

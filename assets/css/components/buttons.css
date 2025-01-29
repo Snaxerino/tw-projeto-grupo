@@ -1,0 +1,102 @@
+/* ---------- Buttons ---------- */
+
+.btn-primary, .btn-secondary {
+	padding: var(--spacing-md) var(--spacing);
+	border-radius: var(--radius-md);
+	border: 0;
+    width: 100%;
+    height: min-content;
+}
+
+/* Button Primary */
+
+.btn-primary {
+    background-color: var(--surface-brand);
+    color: var(--text-white);
+	border: 1px solid var(--border-brand);
+}
+
+.btn-primary:focus {
+    outline-offset: 0.25rem;
+    outline-color: var(--outline-brand);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 1);
+}
+
+/* Button Secondary */
+
+.btn-secondary {
+    background-color: var(--surface);
+    color: var(--text-primary);
+	border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+	box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:focus {
+    outline-offset: 0.25rem;
+    outline-color: var(--outline-secondary);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 1);
+}
+
+/* Button Tertiary */
+
+.btn-tertiary {
+	display: flex;
+	align-items: center;
+    padding: var(--spacing-xs);
+    background-color: white;
+    color: var(--text-primary);
+	gap: var(--spacing);
+    border-radius: var(--radius-xs);
+    border: 1px solid transparent;
+    width: 100%;
+    height: min-content;
+}
+
+.btn-tertiary path {
+	stroke: var(--icon-base);
+}
+
+.btn-tertiary:hover {
+	background-color: var(--foreground);
+	border: 1px solid var(--border-hover);
+}
+
+.btn-tertiary:hover path {
+	stroke: var(--icon-active);
+}
+
+.btn-tertiary:focus {
+	outline: none; 
+	background-color: var(--foreground);
+	border: 1px solid var(--border-hover);
+}
+
+/* Button Perfil utilizador */
+
+.perfil-utilizador {
+    display: flex;
+	background-color: var(--surface);
+    align-items: center;
+    gap: var(--spacing-sm);
+	border: 1px solid var(--border);
+	padding: var(--spacing-sm);
+	border-radius: var(--spacing-md);
+	cursor: pointer;
+	box-shadow: var(--shadow-sm);
+}
+
+.perfil-utilizador:hover {
+	background-color: var(--foreground);
+	border: 1px solid var(--border-hover);
+	transition: all 300ms ease-in-out;
+	box-shadow: none;
+}
+
+.perfil-utilizador:focus {
+	outline-offset: 0.25rem;
+    outline-color: var(--outline-secondary);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 1);
+}
