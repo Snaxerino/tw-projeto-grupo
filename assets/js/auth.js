@@ -1,6 +1,6 @@
 const USERS = [
-    { numero: 40342772, turma: "A", cargo: "Admin", nome: "Mário Pinto", password: "1234", avatar: "/assets/imgs/alunos/avatar.jpg"},
-    { numero: 40240700, turma: "A", cargo: "Aluno", nome: "João", password: "12345", avatar: "/assets/imgs/professores/avatar.jpg"},
+    { numero: 40342772, turma: "A e B", cargo: "Professor", nome: "Mário", password: "1234", avatar: "/assets/imgs/alunos/avatar.jpg"},
+    { numero: 40240700, turma: "A e B", cargo: "Professor", nome: "João", password: "12345", avatar: "/assets/imgs/professores/avatar.jpg"},
 ]
 
 const login = (event) => {
@@ -26,4 +26,4 @@ const login = (event) => {
     }
 }
 
-document.querySelector(".login").addEventListener("submit", login);
+document.querySelector(".login").addEventListener("submit", login)
